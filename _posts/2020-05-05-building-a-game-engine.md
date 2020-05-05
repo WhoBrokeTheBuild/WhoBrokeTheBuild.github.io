@@ -17,7 +17,7 @@ tags:
 - OSX
 ---
 
-# {% post.title %}
+# {% page.title %}
 
 If you are writing a Game Engine in 2020, it's likely for one of three reasons:
 
