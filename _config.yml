@@ -1,5 +1,7 @@
 title: WhoBrokeTheBuild's Development Blog
 github_username:  WhoBrokeTheBuild
 
+baseurl: https://whobrokethebuild.github.io/
+
 markdown: kramdown
 theme: jekyll-theme-minimal
