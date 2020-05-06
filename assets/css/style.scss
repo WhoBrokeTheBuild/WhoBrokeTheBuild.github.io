@@ -3,14 +3,22 @@
 
 @import "{{ site.theme }}";
 
+@media print, screen and (min-width: 960px) {
+    section {
+        width: 600px;
+    }
+}
+
+@media print, screen and (max-width: 720px) {
+    body {
+        word-wrap: normal;
+    }
+}
+
 header h1 {
     font-size: 2em;
 }
 
 .wrapper {
     width: 960px;
-}
-
-section {
-    width: 600px;
 }
