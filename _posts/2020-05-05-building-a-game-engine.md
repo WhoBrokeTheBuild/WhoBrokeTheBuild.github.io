@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building a Game Engine"
+title: Building a Game Engine
 excerpt: An introduction to building a Game Engine for fun and ~profit~ practice.
 date: 2020-05-05 22:00:00 -0400
 tags: 
