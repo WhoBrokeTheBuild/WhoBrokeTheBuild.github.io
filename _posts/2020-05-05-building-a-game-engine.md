@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Building a Game Engine"
+excerpt: Why do I, and why would you, want to build a game engine?
 date: 2020-05-05 22:00:00 -0400
 tags: 
 - Game Engine
@@ -16,8 +17,6 @@ tags:
 - Windows
 - OSX
 ---
-
-# {{ page.title }}
 
 If you are writing a Game Engine in 2020, it's likely for one of three reasons:
 

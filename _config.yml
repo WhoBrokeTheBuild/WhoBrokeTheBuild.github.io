@@ -3,5 +3,8 @@ github_username:  WhoBrokeTheBuild
 
 author: Stephen Lane-Walsh
 
+description: |
+  <a href="/blog.html">Blog</a>
+
 markdown: kramdown
 theme: jekyll-theme-minimal
