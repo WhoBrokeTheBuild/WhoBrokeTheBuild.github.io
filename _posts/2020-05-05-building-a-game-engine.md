@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Building a Game Engine
-excerpt: An introduction to building a Game Engine for fun and ~profit~ practice.
+excerpt: An introduction to building a Game Engine for fun and <del>profit</del> practice.
 date: 2020-05-05 22:00:00 -0400
 tags: 
 - Game Engine
@@ -17,6 +17,8 @@ tags:
 - Windows
 - OSX
 ---
+
+{% include game-engine-toc.html %}
 
 If you are writing a Game Engine in 2020, it's likely for one of three reasons:
 

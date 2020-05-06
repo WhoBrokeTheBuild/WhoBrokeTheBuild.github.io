@@ -61,6 +61,16 @@ a:hover, a:focus {
     color: #FF8D00;
 }
 
+.toc {
+    border: 1px solid #AAA;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.toc ol {
+    margin: 10px 0;
+}
+
 /* Monokai */
 
 .highlight { font-weight: normal !important; }
