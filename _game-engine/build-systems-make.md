@@ -53,7 +53,7 @@ TARGET = bin/example
 SOURCES = $(wildcard src/**/*.cpp src/*.cpp)
 OBJECTS = $(patsubst src/%.cpp, obj/%.o, $(SOURCES))
 
-# Gather our test source files, and create a target for each of them
+# Gather our test source files, and create a target for each
 TEST_SOURCES = $(wildcard tests/*_test.cpp)
 TEST_TARGETS = $(patsubst tests/%.cpp, bin/%, $(TEST_SOURCES))
 

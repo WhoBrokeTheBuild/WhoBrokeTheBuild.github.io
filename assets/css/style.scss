@@ -44,7 +44,8 @@ figure {
     margin: 0;
 }
 
-figure, .highlight {
+figure,
+.highlight {
     background-color: transparent;
 }
 
@@ -54,6 +55,7 @@ strong, th {
 
 pre {
     border-color: #111;
+    tab-size: 4;
 }
 
 a {
@@ -71,8 +73,17 @@ a:hover, a:focus {
     margin-bottom: 10px;
 }
 
-.series ol {
+.series ol,
+.series ul {
     margin: 10px 0;
+    padding-inline-start: 30px;
+}
+
+.series ol ol, 
+.series ol ul,
+.series ul ol,
+.series ul ul {
+    margin: 0;
 }
 
 /* Monokai */
