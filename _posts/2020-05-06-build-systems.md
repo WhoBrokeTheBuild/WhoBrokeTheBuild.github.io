@@ -2,7 +2,7 @@
 layout: post
 title: Build Systems
 excerpt: An overview of C++ Build Systems, and the reasons behind choosing CMake.
-date: 2020-05-06 22:00:00 -0400
+date: 2020-05-06 10:00:00 -0400
 tags: 
 - Game Engine
 - Programming
