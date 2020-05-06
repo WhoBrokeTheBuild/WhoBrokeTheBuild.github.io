@@ -13,17 +13,18 @@ tags:
 
 {% include game-engine-series.html %}
 
-A logical first step when building a complicated software project, like a Game Engine, is choosing a build system. This will lay out the requirements for the project, and then go through the build systems that I tried.
+A logical first step when building a complex software project, like a Game Engine, is choosing a build system. This post will lay out my requirements, and then go through the build systems that I've tried.
 
 ## Requirements
 
 * **Cross-Platform**, support for Linux, Windows, OSX. Preferably native support.
-* **Dependency Management**, support for finding and/or building the libraries needed to build the engine.
+* **Dependency Management**, support for finding and/or building the libraries needed by the engine.
 * **Multiple Targets**, support multiple libraries and executables, linked together in specific ways.
+* **Asset Management**, support for processing and/or copying assets such as shaders, textures, models, etc.
 * **Distributed Config**, support for distributing build system code throughout the project folder structure. Not being limited to one build file for everything.
-* **Unit Tests**, support for building and running unit tests.
+* **Tests**, support for building and running unit tests, integration tests, etc.
 * **Includes/Macros**, support for re-using build system code for all demos, libraries, etc.
-* **Run Targets**, support for adding targets to run the demos, tests, etc. Preferably with the ability to run them through tools like `valgrind`, `gdb`, etc.
+* **Run Targets**, support for adding targets to run the demos, tests, etc. Preferably with the ability to run them through tools like `gdb`, `valgrind`, etc.
 * **Packaging**, support for adding packaging targets to build `.deb`, `.zip`, etc.
 
 ## Make
@@ -50,7 +51,8 @@ Here is a very basic `Makefile` that compiles a C++ program, and links in `SDL2`
 **Note** There are many ways to find `SDL2`, this example uses `pkg-config` and the standard name on Ubuntu. This might change based on your distribution.
 
 ```Makefile
-# Targets that don't create files are called phony, so we declare them explicitly
+# Targets that don't create files are called phony, so we declare 
+# them explicitly
 .PHONY: all clean install run gdb test
 
 # Set the standard compiler and linker flags
@@ -60,17 +62,22 @@ LDLIBS   += $(shell pkg-config --libs-only-l sdl2)
 
 PREFIX ?= /usr/local
 
-# Set variables for our target, sources, objects, etc.
+# Configure variables used by our rules
 TARGET = bin/example
+
+# Gather our source files, and a list of object file counterparts
 SOURCES = $(wildcard src/**/*.cpp src/*.cpp)
 OBJECTS = $(patsubst src/%.cpp, obj/%.o, $(SOURCES))
 
-TEST_SOURCES = $(wildcard tests/%_test.cpp)
+# Gather our test source files, and create a target for each of them
+TEST_SOURCES = $(wildcard tests/*_test.cpp)
 TEST_TARGETS = $(patsubst tests/%.cpp, bin/%, $(TEST_SOURCES))
 
 # The general rule for building all .cpp files into .o files
-# The proper way to do this would involve some flags to build a dependency file, usually a .d, which could track which header files have changed as well.
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+# The proper way to do this would involve some flags to build a
+# dependency file, usually a .d, which could track which header
+# files have changed as well.
+obj/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 # The rule for building our main target
@@ -83,7 +90,8 @@ all: $(TARGET)
 clean:
     rm -f $(TARGET) $(OBJECTS) $(TEST_TARGETS)
 
-# Install into the proper directory, as pointed to by DESTDIR/PREFIX
+# Install into the proper directory, as pointed to by
+# the standard DESTDIR/PREFIX variables
 install: $(TARGET)
     install -d $(DESTDIR)/$(PREFIX)/bin/
     install $(TARGET) $(DESTDIR)/$(PREFIX)/bin/
@@ -97,7 +105,10 @@ gdb: $(TARGET)
     gdb --args $(TARGET)
 
 # The rule to build each test
-# In order to make this useful, you would want to build in the objects from the main target, or otherwise link agains the code you would be testing. For the point of this example, we're going to skip over that.
+# In order to make this useful, you would want to build in the
+# objects from the main target, or otherwise link agains the
+# code you would be testing. For the point of this example,
+# we're going to skip over that.
 bin/%_test: tests/%_test.cpp
     $(CXX) -o $@ $<
 
@@ -107,13 +118,27 @@ test: $(TEST_TARGETS)
 
 ```
 
+Here is the directory structure assumed by that `Makefile`:
+
+```
+├── Makefile
+├── bin/
+├── obj/
+├── src/
+│   ├── test.hpp
+│   └── main.cpp
+└── tests/
+    └── example_test.cpp
+```
+
 | Requirement | Ranking | Notes |
 |-|-|-|
-| Cross-Platform | Partial | Make is not natively supported on Windows. While you can install it, there are numerous problems and it's missing many of the ecosystem tools like `pkg-config` you would find on a UNIX variant. |
-| Dependency Management | Partial | Tools such as `pkg-config` can be invoked to get the flags needed to build against most dependencies, as long as they are installed in the system. |
-| Multiple Targets | Full | Make has full support for complex dependency chains. However, to link against a target you will need to specify the proper flags to the compiler yourself. |
-| Distributed Config | Full | Use `make -C` to run make in a subdirectory. |
-| Unit Tests | Full | While make has no built in support for testing, there is a very common standard of running `make test` to run whatever tests the project provides. Building tests can be done easily with a wildcard rule. |
-| Includes/Macros | Full | Make has full support for includes, often with the file extension `.mk`. |
-| Run Targets | Full | Run targets can be easily added as phony targets with the proper command to run the target. |
-| Packaging | Full | Packaging targets can be easily created using standard tools such as `tar`, `dpkg-deb`, etc. |
+| Cross-Platform | Partial | Make is not natively supported on Windows. While you can install it, there are numerous problems and it benefits from many tools found on UNIX systems such as `pkg-config`, `find`, etc. You generally have to install a whole suite of UNIX tools on windows to make it worthwhile. |
+| Dependency Management | Partial | Tools such as `pkg-config` can be invoked to get the flags needed to build against most dependencies, as long as they are installed in the system. Finding and linking against them manually is a painful process. |
+| Multiple Targets | Full | Make has full support for complex dependency chains. However, to link against a target you will need to specify the proper flags to the compiler yourself. Additionally, a well-built dependency chain benefits highly from running make in parallel (`make -l` or `make -j8`). |
+| Asset Management | Full | Make can be configured to 'build' any file. Adding rules to compile `%.glsl` to `%.spv` would be easy. Rules to copy files would simply use `cp`.
+| Distributed Config | Full | Make can run recursively, using `make -C` to run make in a subdirectory. |
+| Tests | Full | While make has no built-in support for testing, the target `test` is often used to run whatever tests the project provides. e.g. `make test`. Building tests can be done easily with a wildcard rule, however linking them against the correct object files or libraries can be cumbersome. |
+| Includes/Macros | Full | Make has full support for includes, often with the file extension `.mk`. e.g. `include Common.mk`  |
+| Run Targets | Full | Run targets can be easily added as phony targets with the proper command to run the target. See the above example. |
+| Packaging | Full | Packaging targets can be created using standard tools such as `tar`, `dpkg-deb`, etc. |
