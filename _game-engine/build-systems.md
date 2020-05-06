@@ -52,7 +52,7 @@ Here is a very basic `Makefile` that compiles a C++ program, and links it agains
 
 **Note** There are many ways to find `SDL2`, this example uses `pkg-config` and the standard name on Ubuntu. This might change based on your distribution.
 
-```Makefile
+```make
 # Targets that don't create files are called phony, so we declare 
 # them explicitly
 .PHONY: all clean install run gdb test
