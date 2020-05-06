@@ -10,7 +10,7 @@ I'm just a programmer who hates themself enough to use C on a regular basis. I h
 ## Projects
 
 [https://github.com/WhoBrokeTheBuild/Dusk](https://github.com/WhoBrokeTheBuild/Dusk)
-> The latest in a long line of toy game engines. For information about how it was built, check <a href="/2020/05/06/building-a-game-engine.html">here</a>.
+> The latest in a long line of toy game engines. For information about how it was built, check <a href="/game-engine/building-a-game-engine/">here</a>.
 
 [https://github.com/WhoBrokeTheBuild/GBx](https://github.com/WhoBrokeTheBuild/GBx)
 > A toy GameBoy Emulator written in C.

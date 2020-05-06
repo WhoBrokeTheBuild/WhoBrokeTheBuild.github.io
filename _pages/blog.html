@@ -1,0 +1,23 @@
+---
+layout: default
+title: Blog
+---
+
+<h2>Game Engine</h2>
+
+  {% for post in site.game-engine %}
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <div class="post-excerpt">{{ post.excerpt }}</div>
+      <br />
+  {% endfor %}
+
+<br />
+<br />
+
+<h2>Programming</h2>
+
+  {% for post in site.programming %}
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <div class="post-excerpt">{{ post.excerpt }}</div>
+      <br />
+  {% endfor %}

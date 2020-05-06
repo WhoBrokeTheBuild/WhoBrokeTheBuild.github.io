@@ -8,3 +8,16 @@ description: |
 
 markdown: kramdown
 theme: jekyll-theme-minimal
+
+include: ['_pages', '_game-engine', '_programming']
+
+collections:
+  pages:
+    output: true
+    permalink: /:title:output_ext
+  game-engine:
+    output: true
+    permalink: /:collection/:title:output_ext
+  programming:
+    output: true
+    permalink: /:collection/:title:output_ext

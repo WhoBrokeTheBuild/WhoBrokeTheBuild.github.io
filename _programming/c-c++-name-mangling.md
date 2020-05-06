@@ -2,7 +2,8 @@
 layout: post
 title: Name Mangling
 excerpt: A simple explanation of C++ name mangling.
-date: 2016-06-28 20:00:00 -0400
+date: 2016-06-28 00:00:00 -0400
+category: programming
 tags: 
 - Programming
 - C
