@@ -39,7 +39,7 @@ The flexibility of make comes from the structure of rules.
 
 ```
 target: depend
-    code
+	code
 ```
 
 * `target` can either be a filename or a "phony" name. If the target is a file, it will be built when the timestamp is older than that of its dependencies, or if the file does not exist. If the target is a phony name, such as `all`, `clean`, or `test`, it will always be run.
@@ -84,27 +84,27 @@ obj/%.o: src/%.cpp
 
 # The rule for building our main target
 $(TARGET): $(OBJECTS)
-    $(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 all: $(TARGET)
 
 # Remove all targets and objects
 clean:
-    rm -f $(TARGET) $(OBJECTS) $(TEST_TARGETS)
+	rm -f $(TARGET) $(OBJECTS) $(TEST_TARGETS)
 
 # Install into the proper directory, as pointed to by
 # the standard DESTDIR/PREFIX variables
 install: $(TARGET)
-    install -d $(DESTDIR)/$(PREFIX)/bin/
-    install $(TARGET) $(DESTDIR)/$(PREFIX)/bin/
+	install -d $(DESTDIR)/$(PREFIX)/bin/
+	install $(TARGET) $(DESTDIR)/$(PREFIX)/bin/
 
 # Run our target
 run: $(TARGET)
-    ./$(TARGET)
+	./$(TARGET)
 
 # Run our target, but with gdb
 gdb: $(TARGET)
-    gdb --args $(TARGET)
+	gdb --args $(TARGET)
 
 # The rule to build each test
 # In order to make this useful, you would want to build in the
@@ -112,11 +112,11 @@ gdb: $(TARGET)
 # code you would be testing. For the point of this example,
 # we're going to skip over that.
 bin/%_test: tests/%_test.cpp
-    $(CXX) -o $@ $<
+	$(CXX) -o $@ $<
 
 # Build and run all of our tests
 test: $(TEST_TARGETS)
-    $(addsuffix ;,$(TEST_TARGETS))
+	$(addsuffix ;,$(TEST_TARGETS))
 
 ```
 
