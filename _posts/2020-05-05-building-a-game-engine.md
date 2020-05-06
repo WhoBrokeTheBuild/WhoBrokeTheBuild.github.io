@@ -18,7 +18,7 @@ tags:
 - OSX
 ---
 
-{% include game-engine-toc.html %}
+{% include game-engine-series.html %}
 
 If you are writing a Game Engine in 2020, it's likely for one of three reasons:
 

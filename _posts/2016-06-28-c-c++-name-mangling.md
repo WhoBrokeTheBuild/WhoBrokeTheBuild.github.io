@@ -13,15 +13,15 @@ Something you've probably heard of if you've ever written any mixed C++/Assembly
 is Name Mangling. You probably learned that, to call any C++ functions from Assembly 
 code you need to append an extern "C" like so:
 
-{% highlight c %}
+```c
 extern "C" func();
-{% endhighlight %}
+```
 
 But what exactly is Name Mangling, and what does it look like? We're going to do a
 little experiment to find out. Take this code, and compile it as both C and C++ code,
 like so:
 
-{% highlight c %}
+```c
 #include <stdio.h>
 
 void doSomething()
@@ -33,18 +33,18 @@ int main(int argc, char** argv)
 {
     doSomething();
 }
-{% endhighlight %}
+```
 
-{% highlight shell %}
+```shell
 $ gcc -o testc test.c
 $ g++ -o testcpp test.cpp
-{% endhighlight %}
+```
 
 Now we're going to get the dissassembly of each, and look for our function "doSomething"
 
-{% highlight shell %}
+```shell
 $ objdump -d testc
-{% endhighlight %}
+```
 
 In this mess of information you'll probably find something like this:
 
@@ -58,9 +58,9 @@ In this mess of information you'll probably find something like this:
 That is the function you wrote in C, converted to assembly, using the exact name that you 
 gave it. Now lets do the same for the C++ one.
 
-{% highlight shell %}
+```shell
 $ objdump -d testcpp
-{% endhighlight %}
+```
 
 You'll probably find something that looks similiar to this:
 
