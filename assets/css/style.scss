@@ -3,9 +3,12 @@
 
 @import "{{ site.theme }}";
 
-@media print, screen and (min-width: 960px) {
+@media print, screen and (min-width: 1200px) {
     section {
-        width: 600px;
+        width: 700px;
+    }
+    .wrapper {
+        width: 1050px;
     }
 }
 
@@ -15,9 +18,24 @@
     }
 }
 
+@media print, screen and (max-width: 960px) {
+    header {
+        padding-right: 0;
+    }
+}
+
 html, body {
     background-color: #222;
     color: #AAA;
+    min-width: fit-content;
+}
+
+header{
+    width: 220px;
+}
+
+footer {
+    width: 130px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -34,10 +52,6 @@ p code {
 
 header h1 {
     font-size: 2em;
-}
-
-.wrapper {
-    width: 960px;
 }
 
 figure {
