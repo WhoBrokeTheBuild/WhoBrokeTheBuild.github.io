@@ -119,13 +119,13 @@ Here is the directory structure assumed by that `Makefile`:
 
 | Requirement | Ranking | Notes |
 |-|-|-|
-| Cross-Platform | Partial | Make is not natively supported on Windows. While you can install it, there are numerous problems with doing so. In addition, `make` greatly benefits from the tools found on UNIX systems such as `pkg-config`, `find`, etc. You generally have to install a whole suite of UNIX tools on windows to make it worthwhile. Visual Studio does have an equivalent, `NMake`, however it is not cross-platform at all. |
+| Cross-Platform | Partial | Make is not natively supported on Windows.<br />While you can install it, there are numerous problems with doing so. In addition, `make` greatly benefits from the tools found on UNIX systems such as `pkg-config`, `find`, etc.<br />You generally have to install a whole suite of UNIX tools on windows to make it worthwhile. Visual Studio does have an equivalent, `NMake`, however it is not cross-platform at all. |
 | Conditionals | Full | Make has full support for if statements. e.g. `ifeq ($(CXX), g++)` |
 | Dependency Management | Partial | Tools such as `pkg-config` can be invoked to get the flags needed to build against most dependencies, as long as they are installed in the system. Finding and linking against them manually is a painful process. |
-| Multiple Targets | Full | Make has full support for complex dependency chains. However, to link against a target you will need to specify the proper flags to the compiler yourself. Additionally, a well-built dependency chain benefits highly from running make in parallel (`make -l` or `make -j8`). |
+| Multiple Targets | Full | Make has full support for complex dependency chains. However, to link against a target you will need to specify the proper flags to the compiler yourself.<br />Additionally, a well-built dependency chain benefits highly from running make in parallel (`make -l` or `make -j8`). |
 | Asset Management | Full | Make can be configured to 'build' any file. Adding rules to compile `%.glsl` to `%.spv` would be easy. Rules to copy files would simply use `cp`.
 | Distributed Config | Full | Make can run recursively, using `make -C` to run make in a subdirectory. |
-| Tests | Full | While make has no built-in support for testing, the target `test` is often used to run whatever tests the project provides. e.g. `make test`. Building tests can be done easily with a wildcard rule, however linking them against the correct object files or libraries can be cumbersome. |
+| Tests | Full | While make has no built-in support for testing, the target `test` is often used to run whatever tests the project provides. e.g. `make test`.<br />Building tests can be done easily with a wildcard rule, however linking them against the correct object files or libraries can be cumbersome. |
 | Includes/Macros | Full | Make has full support for includes, often with the file extension `.mk`. e.g. `include Common.mk`  |
 | Run Targets | Full | Run targets can be easily added as phony targets with the proper command to run the target. See the above example. |
 | Packaging | Full | Packaging targets can be created using standard tools such as `tar`, `dpkg-deb`, etc. |
