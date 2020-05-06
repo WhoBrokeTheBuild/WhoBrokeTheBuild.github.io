@@ -19,8 +19,6 @@ tags:
 - OSX
 ---
 
-{% include game-engine-series.html %}
-
 If you are writing a Game Engine in 2020, it's likely for one of three reasons:
 
 * You want to learn how they work
@@ -46,3 +44,5 @@ The windowing framework will be `SDL2`, which will also be used for the keyboard
 As with all of my previous attempts at writing an engine, it will be named `Dusk`.
 
 [https://github.com/WhoBrokeTheBuild/Dusk](https://github.com/WhoBrokeTheBuild/Dusk)
+
+{% include game-engine-series.html %}
