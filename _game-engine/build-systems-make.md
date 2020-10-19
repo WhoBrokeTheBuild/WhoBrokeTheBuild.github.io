@@ -32,12 +32,18 @@ target: depend
 
 Here is a very basic `Makefile` that compiles a C++ program, and links it against `SDL2`.
 
+The code used in this example can be found here:  
+[https://github.com/WhoBrokeTheBuild/build-systems/tree/main/make](https://github.com/WhoBrokeTheBuild/build-systems/tree/main/make)
+
 **Note** There are many ways to find `SDL2`, this example uses `pkg-config` and the standard name on Ubuntu. This might change based on your distribution.
 
 ```make
 # Targets that don't create files are called phony, so we declare 
 # them explicitly
 .PHONY: all clean install run gdb test
+
+# Ensure directories exist
+$(shell mkdir -p src/ obj/ bin/)
 
 # Set the standard compiler and linker flags
 CXXFLAGS += -g -Wall $(shell pkg-config --cflags sdl2)
@@ -88,13 +94,17 @@ run: $(TARGET)
 gdb: $(TARGET)
 	gdb --args $(TARGET)
 
+# Run our target, but with valgrind
+valgrind: $(TARGET)
+	valgrind $(TARGET)
+
 # The rule to build each test
 # In order to make this useful, you would want to build in the
 # objects from the main target, or otherwise link agains the
 # code you would be testing. For the point of this example,
 # we're going to skip over that.
 bin/%_test: tests/%_test.cpp
-	$(CXX) -o $@ $<
+	$(CXX) -I src -o $@ $<
 
 # Build and run all of our tests
 test: $(TEST_TARGETS)
@@ -109,7 +119,7 @@ Here is the directory structure assumed by that `Makefile`:
 ├── bin/
 ├── obj/
 ├── src/
-│   ├── test.hpp
+│   ├── example.hpp
 │   └── main.cpp
 └── tests/
     └── example_test.cpp
