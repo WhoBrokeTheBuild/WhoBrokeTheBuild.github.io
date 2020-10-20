@@ -98,7 +98,8 @@ all: $(EXE_TARGET) $(LIB_TARGET)
 
 # Remove all targets and objects
 clean:
-	rm -f $(EXE_TARGET) $(LIB_TARGET) $(TEST_TARGETS) $(EXE_OBJECTS) $(LIB_OBJECTS)
+	rm -f $(EXE_TARGET) $(LIB_TARGET) $(TEST_TARGETS)
+	rm -f $(EXE_OBJECTS) $(LIB_OBJECTS)
 
 # Install into the proper directory, as pointed to by
 # the standard DESTDIR/PREFIX variables
